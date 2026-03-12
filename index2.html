@@ -1,21 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dreamlight">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALT Playbook Quiz</title>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/quiz.css" />
+  <!-- Prevent theme flash -->
+  <script>
+    (function () {
+      var t = localStorage.getItem('alt-theme') || 'dreamlight';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
 
-  <!-- Grain overlay -->
+  <!-- Grain overlay (dreamlight) -->
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- Gradient background -->
+  <!-- Gradient background (dreamlight) -->
   <div class="orb-field" aria-hidden="true">
     <div class="orb-warm"></div>
     <div class="orb-mauve"></div>
+  </div>
+
+  <!-- Corner brackets (pixel) -->
+  <div class="corners" aria-hidden="true">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+  </div>
+
+  <!-- Theme switcher -->
+  <div class="theme-switcher" id="theme-switcher">
+    <button class="theme-btn" data-theme-target="dreamlight">✦ Dream</button>
+    <button class="theme-btn" data-theme-target="pixel">◼ Pixel</button>
   </div>
 
   <div class="landing">
@@ -23,23 +44,53 @@
     <!-- Hero -->
     <div class="landing-hero">
       <div class="hero-content">
+
         <div class="hero-tag">
-          <!-- 4-pointed star -->
-          <svg class="hero-tag-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Star icon: dreamlight -->
+          <svg class="hero-tag-icon hero-icon-dream" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M12 2 C12 2 12.8 7.5 14.5 9.5 C16.5 11.2 22 12 22 12 C22 12 16.5 12.8 14.5 14.5 C12.8 16.5 12 22 12 22 C12 22 11.2 16.5 9.5 14.5 C7.5 12.8 2 12 2 12 C2 12 7.5 11.2 9.5 9.5 C11.2 7.5 12 2 12 2Z" fill="currentColor"/>
+          </svg>
+          <!-- Book icon: pixel -->
+          <svg class="hero-tag-icon hero-icon-pixel" width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g clip-path="url(#book-clip2)">
+              <path d="M3.81006 1.52H28.1901V3.05H5.34006V4.57H28.1901V6.1H3.81006V7.62H5.34006V30.48H3.81006V32H29.7201V30.48H6.86006V7.62H29.7201V30.48H31.2401V6.1H29.7201V1.52H31.2401V0H3.81006V1.52Z" fill="currentColor"/>
+              <path d="M25.15 24.38H23.62V25.91H25.15V24.38Z" fill="currentColor"/>
+              <path d="M25.15 12.19H23.62V10.67H12.96V12.19H11.43V13.72H9.91003V24.38H11.43V18.29H12.96V16.76H14.48V15.24H22.1V16.76H23.62V18.29H25.15V24.38H26.67V13.72H25.15V12.19Z" fill="currentColor"/>
+              <path d="M23.62 25.91H12.96V27.43H23.62V25.91Z" fill="currentColor"/>
+              <path d="M22.1001 21.33H20.5701V22.86H22.1001V21.33Z" fill="currentColor"/>
+              <path d="M22.1001 18.29H20.5701V19.81H22.1001V18.29Z" fill="currentColor"/>
+              <path d="M20.57 22.86H16V24.38H20.57V22.86Z" fill="currentColor"/>
+              <path d="M16 21.33H14.48V22.86H16V21.33Z" fill="currentColor"/>
+              <path d="M16 18.29H14.48V19.81H16V18.29Z" fill="currentColor"/>
+              <path d="M12.9601 24.38H11.4301V25.91H12.9601V24.38Z" fill="currentColor"/>
+              <path d="M3.81004 28.95H2.29004V30.48H3.81004V28.95Z" fill="currentColor"/>
+              <path d="M3.81004 1.51999H2.29004V3.04999H3.81004V1.51999Z" fill="currentColor"/>
+              <path d="M2.29001 6.09999H3.81001V4.56999H2.29001V3.04999H0.76001V28.95H2.29001V6.09999Z" fill="currentColor"/>
+            </g>
+            <defs>
+              <clipPath id="book-clip2"><rect width="32" height="32" fill="white"/></clipPath>
+            </defs>
           </svg>
           <span>Playbook</span>
         </div>
+
         <p class="hero-eyebrow">Test Your</p>
         <h1 class="hero-title" id="alt-title">ALT</h1>
         <p class="hero-knowledge">Knowledge</p>
         <a href="quiz.html" class="btn-primary">Begin &nbsp;→</a>
+
       </div>
+    </div>
+
+    <!-- Pixel mosaic (pixel theme only) -->
+    <div class="landing-mosaic">
+      <canvas id="pixel-mosaic"></canvas>
     </div>
 
   </div>
 
   <script>
+    // ── Scramble animation ──
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
     const SHORT = 'ALT';
     const LONG = 'AI-LEAN TEAM';
@@ -84,8 +135,88 @@
       }, 1000 / fps);
     }
 
+    // ── Pixel mosaic ──
+    function drawMosaic() {
+      const canvas = document.getElementById('pixel-mosaic');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const SZ = 14;
+      const BLUE = '#0B2FCC';
+
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+
+      const cols = Math.ceil(canvas.width / SZ);
+      const rows = Math.ceil(canvas.height / SZ);
+
+      const heights = Array.from({ length: cols }, () =>
+        Math.floor(Math.random() * rows * 0.75) + Math.floor(rows * 0.15)
+      );
+
+      for (let pass = 0; pass < 3; pass++) {
+        for (let c = 1; c < cols - 1; c++) {
+          heights[c] = Math.round((heights[c - 1] + heights[c] * 2 + heights[c + 1]) / 4);
+        }
+      }
+
+      const pixels = [];
+      for (let c = 0; c < cols; c++) {
+        const startRow = rows - heights[c];
+        for (let r = startRow; r < rows; r++) {
+          const depth = (r - startRow) / heights[c];
+          const prob = r >= rows - 1 ? 0.97 : depth > 0.6 ? 0.82 : 0.55;
+          if (Math.random() < prob) pixels.push([c, r]);
+        }
+      }
+
+      for (let i = pixels.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pixels[i], pixels[j]] = [pixels[j], pixels[i]];
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const duration = 1200;
+      let drawn = 0;
+      let startTime = null;
+
+      function animate(now) {
+        if (!startTime) startTime = now;
+        const progress = Math.min((now - startTime) / duration, 1);
+        const target = Math.floor(progress * pixels.length);
+        ctx.fillStyle = BLUE;
+        for (; drawn < target; drawn++) {
+          const [c, r] = pixels[drawn];
+          ctx.fillRect(c * SZ, r * SZ, SZ - 1, SZ - 1);
+        }
+        if (progress < 1) requestAnimationFrame(animate);
+      }
+
+      setTimeout(() => requestAnimationFrame(animate), 400);
+    }
+
+    // ── Theme switcher ──
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('alt-theme', theme);
+
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.themeTarget === theme);
+      });
+
+      if (theme === 'pixel') {
+        requestAnimationFrame(drawMosaic);
+      }
+    }
+
+    // Init
     window.addEventListener('load', () => {
+      const saved = localStorage.getItem('alt-theme') || 'dreamlight';
+      setTheme(saved);
       scrambleTo(SHORT, 1400);
+    });
+
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => setTheme(btn.dataset.themeTarget));
     });
 
     titleEl.addEventListener('mouseenter', () => {
@@ -95,7 +226,6 @@
     titleEl.addEventListener('mouseleave', () => {
       if (currentText === LONG) scrambleTo(SHORT, 500);
     });
-
   </script>
   <script src="js/cursor.js"></script>
 

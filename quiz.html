@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dreamlight">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALT Playbook Quiz</title>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/quiz.css" />
+  <script>(function(){var t=localStorage.getItem('alt-theme')||'dreamlight';document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 <body class="quiz-body-page">
 
@@ -27,9 +28,17 @@
       <span class="quiz-counter" id="question-counter">01 / 27</span>
     </div>
 
-    <!-- Constellation progress -->
+    <!-- Constellation progress (dreamlight) -->
     <div class="constellation-wrap">
       <svg id="constellation-svg" class="constellation-svg" width="100%" height="56" viewBox="0 0 600 48" preserveAspectRatio="none"></svg>
+    </div>
+
+    <!-- Retro progress bar (pixel theme) -->
+    <div class="retro-progress-wrap">
+      <div class="retro-progress-track">
+        <div class="retro-progress-fill" id="retro-progress-fill"></div>
+      </div>
+      <span class="retro-progress-label" id="retro-progress-label">01 / 27</span>
     </div>
 
     <!-- Main content -->

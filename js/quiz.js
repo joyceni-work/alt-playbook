@@ -37,6 +37,17 @@ function renderQuestion() {
   // Constellation progress
   renderConstellation();
 
+  // Retro progress bar
+  const retroFill = document.getElementById('retro-progress-fill');
+  const retroLabel = document.getElementById('retro-progress-label');
+  if (retroFill) {
+    const pct = questions.length > 1 ? (currentIndex / (questions.length - 1)) * 100 : 0;
+    retroFill.style.width = pct + '%';
+  }
+  if (retroLabel) {
+    retroLabel.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${questions.length}`;
+  }
+
   // Counter + labels
   document.getElementById('question-counter').textContent =
     `${String(currentIndex + 1).padStart(2, '0')} / ${questions.length}`;

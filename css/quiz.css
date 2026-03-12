@@ -23,6 +23,13 @@
 }
 
 @font-face {
+  font-family: 'NeueBit';
+  src: url('../assets/ppneuebit-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'TiemposFine';
   src: url('../assets/TestTiemposFine-Light-BF66457a5102792.otf') format('opentype');
   font-weight: 300;
@@ -1033,4 +1040,599 @@ body.quiz-body-page {
   font-size: 0.875rem;
   color: #1a1a2e;
   line-height: 1.55;
+}
+
+/* ================================
+   Theme Switcher
+   ================================ */
+.theme-switcher {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  display: flex;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 100px;
+  padding: 3px;
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+}
+
+.theme-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.575rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  background: transparent;
+  border: none;
+  border-radius: 100px;
+  padding: 6px 14px;
+  cursor: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.theme-btn.active {
+  background: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ================================
+   Corner brackets (pixel theme)
+   ================================ */
+.corners {
+  display: none;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+}
+
+.corner.tl { top: 1.5rem; left: 1.5rem; border-top: 1px solid rgba(20,20,20,0.25); border-left: 1px solid rgba(20,20,20,0.25); }
+.corner.tr { top: 1.5rem; right: 1.5rem; border-top: 1px solid rgba(20,20,20,0.25); border-right: 1px solid rgba(20,20,20,0.25); }
+.corner.bl { bottom: 1.5rem; left: 1.5rem; border-bottom: 1px solid rgba(20,20,20,0.25); border-left: 1px solid rgba(20,20,20,0.25); }
+.corner.br { bottom: 1.5rem; right: 1.5rem; border-bottom: 1px solid rgba(20,20,20,0.25); border-right: 1px solid rgba(20,20,20,0.25); }
+
+/* ================================
+   Pixel mosaic
+   ================================ */
+.landing-mosaic {
+  display: none;
+  width: 100%;
+  height: 300px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.landing-mosaic canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hero icons — toggle per theme */
+.hero-icon-pixel { display: none; }
+
+/* ================================
+   Pixel Theme Overrides
+   ================================ */
+html[data-theme="pixel"] body {
+  background-color: #F4F4F2;
+  background-image:
+    linear-gradient(rgba(20, 20, 20, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 20, 0.028) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #1A1A1A;
+}
+
+html[data-theme="pixel"] * { cursor: auto !important; }
+
+html[data-theme="pixel"] .grain       { display: none; }
+html[data-theme="pixel"] .orb-field   { display: none; }
+html[data-theme="pixel"] .corners     { display: block; }
+html[data-theme="pixel"] .landing-mosaic { display: block; }
+html[data-theme="pixel"] .star-particle  { display: none !important; }
+
+html[data-theme="pixel"] .hero-icon-dream { display: none; }
+html[data-theme="pixel"] .hero-icon-pixel { display: inline-block; }
+
+html[data-theme="pixel"] .landing {
+  justify-content: flex-start;
+}
+
+html[data-theme="pixel"] .hero-content {
+  gap: 1rem;
+}
+
+html[data-theme="pixel"] .hero-tag {
+  color: #1A1A1A;
+  margin-bottom: 0.5rem;
+}
+
+html[data-theme="pixel"] .hero-tag-icon {
+  color: #1A1A1A;
+  opacity: 1;
+}
+
+html[data-theme="pixel"] .hero-eyebrow {
+  font-family: 'NeueBit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(20, 20, 20, 0.5);
+  text-transform: uppercase;
+  text-shadow: none;
+  margin-top: 0;
+}
+
+html[data-theme="pixel"] .hero-title {
+  font-family: 'Mondwest', sans-serif;
+  font-size: clamp(4rem, 16vw, 10rem);
+  line-height: 0.95;
+  color: #0B2FCC;
+  text-shadow: none;
+  padding: 0;
+}
+
+html[data-theme="pixel"] .hero-knowledge {
+  font-family: 'NeueBit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(20, 20, 20, 0.5);
+  text-shadow: none;
+  text-transform: uppercase;
+}
+
+html[data-theme="pixel"] .btn-primary {
+  color: #F4F4F2;
+  background: #0D0D0D;
+  border: none;
+  border-radius: 0;
+  padding: 14px 28px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  margin-top: 0.5rem;
+}
+
+html[data-theme="pixel"] .btn-primary:hover {
+  background: rgba(13, 13, 13, 0.75);
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+html[data-theme="pixel"] .theme-switcher {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  padding: 2px;
+  gap: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .theme-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  color: rgba(11, 47, 204, 0.45);
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid rgba(11, 47, 204, 0.2);
+  padding: 5px 12px;
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .theme-btn:last-child {
+  border-right: none;
+}
+
+html[data-theme="pixel"] .theme-btn.active {
+  background: #0B2FCC;
+  color: #fff;
+  box-shadow: none;
+}
+
+@media (max-height: 860px) {
+  html[data-theme="pixel"] .landing-mosaic { height: 250px; }
+  html[data-theme="pixel"] .landing-hero { justify-content: flex-end; padding-bottom: 3rem; }
+}
+
+@media (min-height: 1100px) {
+  html[data-theme="pixel"] .landing-mosaic { height: 360px; }
+  html[data-theme="pixel"] .landing-hero { justify-content: flex-end; padding-bottom: 4rem; }
+  html[data-theme="pixel"] .hero-title { font-size: clamp(6rem, 18vw, 13rem); }
+}
+
+/* ================================
+   Retro progress bar (pixel theme only)
+   ================================ */
+.retro-progress-wrap {
+  display: none;
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 1.25rem;
+  gap: 6px;
+  flex-direction: column;
+}
+
+.retro-progress-track {
+  width: 100%;
+  height: 18px;
+  border: 1.5px solid rgba(20, 20, 20, 0.35);
+  background: rgba(20, 20, 20, 0.06);
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.retro-progress-fill {
+  height: 100%;
+  width: 0%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    #0B2FCC 0px,
+    #0B2FCC 9px,
+    transparent 9px,
+    transparent 11px
+  );
+  transition: width 0.35s ease-out;
+}
+
+.retro-progress-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(20, 20, 20, 0.4);
+  text-transform: uppercase;
+}
+
+/* ================================
+   Pixel Theme — Quiz Page
+   ================================ */
+html[data-theme="pixel"] body.quiz-body-page {
+  background-color: #F4F4F2;
+  background-image:
+    linear-gradient(rgba(20, 20, 20, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 20, 0.028) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #1A1A1A;
+}
+
+html[data-theme="pixel"] body.quiz-body-page .grain    { display: none; }
+html[data-theme="pixel"] body.quiz-body-page .orb-field { display: none; }
+
+/* Hide constellation, show retro bar */
+html[data-theme="pixel"] .constellation-wrap  { display: none; }
+html[data-theme="pixel"] .retro-progress-wrap { display: flex; }
+
+/* Topbar */
+html[data-theme="pixel"] .quiz-home {
+  color: rgba(20, 20, 20, 0.4);
+}
+
+html[data-theme="pixel"] .quiz-home:hover {
+  color: #1A1A1A;
+}
+
+html[data-theme="pixel"] .tag {
+  color: rgba(20, 20, 20, 0.45);
+}
+
+html[data-theme="pixel"] .quiz-counter {
+  color: rgba(20, 20, 20, 0.35);
+}
+
+/* Retro progress bar — dark on grey */
+html[data-theme="pixel"] .retro-progress-track {
+  border-color: rgba(20, 20, 20, 0.35);
+  background: rgba(20, 20, 20, 0.06);
+}
+
+html[data-theme="pixel"] .retro-progress-fill {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #0B2FCC 0px,
+    #0B2FCC 9px,
+    transparent 9px,
+    transparent 11px
+  );
+}
+
+html[data-theme="pixel"] .retro-progress-label {
+  color: rgba(20, 20, 20, 0.4);
+}
+
+/* Question */
+html[data-theme="pixel"] .question-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.9rem, 1.9vw, 1.2rem);
+  font-weight: 500;
+  color: #1A1A1A;
+  text-shadow: none;
+  letter-spacing: 0.01em;
+  line-height: 1.65;
+}
+
+/* Option buttons — simple blue outline */
+html[data-theme="pixel"] .option-btn {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  transition: background 0.1s;
+}
+
+html[data-theme="pixel"] .option-btn:hover:not(:disabled) {
+  background: rgba(11, 47, 204, 0.06);
+  transform: none;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .option-letter {
+  color: rgba(11, 47, 204, 0.4);
+  font-size: 0.65rem;
+}
+
+html[data-theme="pixel"] .option-text {
+  color: #0B2FCC;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.875rem;
+}
+
+/* Correct — green fill + checkmark */
+html[data-theme="pixel"] .option-btn.correct {
+  background: #1a9e5c;
+  border-color: #1a9e5c;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .option-btn.correct .option-letter,
+html[data-theme="pixel"] .option-btn.correct .option-text {
+  color: #fff;
+}
+
+html[data-theme="pixel"] .option-btn.correct::after {
+  content: '✓';
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  padding-left: 10px;
+}
+
+/* Incorrect — red outline + X */
+html[data-theme="pixel"] .option-btn.incorrect {
+  background: rgba(214, 63, 63, 0.06);
+  border-color: #d63f3f;
+  box-shadow: none;
+  opacity: 1;
+}
+
+html[data-theme="pixel"] .option-btn.incorrect .option-letter,
+html[data-theme="pixel"] .option-btn.incorrect .option-text {
+  color: #d63f3f;
+}
+
+html[data-theme="pixel"] .option-btn.incorrect::after {
+  content: '✗';
+  margin-left: auto;
+  flex-shrink: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(214, 63, 63, 0.7);
+  padding-left: 10px;
+}
+
+/* Explanation — simple outlined window */
+html[data-theme="pixel"] .explanation {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  animation: none;
+  box-shadow: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+html[data-theme="pixel"] .explanation::before {
+  content: '● ● ●   playbook.doc';
+  display: block;
+  background: #0B2FCC;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 6px 12px;
+}
+
+html[data-theme="pixel"] .explanation-sparkles {
+  top: -44px;
+}
+
+html[data-theme="pixel"] .explanation-sparkles span {
+  color: #0B2FCC;
+  animation: none;
+  text-shadow: none;
+  font-size: 0.85rem !important;
+}
+
+html[data-theme="pixel"] .explanation-label {
+  color: rgba(11, 47, 204, 0.38);
+  padding-top: 14px;
+  display: block;
+}
+
+html[data-theme="pixel"] .explanation-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: #0B2FCC;
+  padding: 6px 16px 18px;
+  line-height: 1.72;
+}
+
+/* Next button — solid blue */
+html[data-theme="pixel"] .btn-next {
+  color: #fff;
+  background: #0B2FCC;
+  border: none;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .btn-next:hover {
+  background: rgba(11, 47, 204, 0.85);
+  transform: none;
+  box-shadow: none;
+}
+
+/* ================================
+   Pixel Theme — Results Page
+   ================================ */
+html[data-theme="pixel"] .results-page {
+  background-color: #F4F4F2;
+  background-image:
+    linear-gradient(rgba(20, 20, 20, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 20, 0.028) 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #1A1A1A;
+}
+
+/* Hide dreamlight elements */
+html[data-theme="pixel"] .results-constellation-wrap { display: none; }
+
+/* Topbar links */
+html[data-theme="pixel"] .results-topbar .quiz-home {
+  color: rgba(20, 20, 20, 0.4);
+}
+
+html[data-theme="pixel"] .results-topbar .quiz-home:hover {
+  color: #1A1A1A;
+}
+
+html[data-theme="pixel"] .results-topbar .tag {
+  color: rgba(20, 20, 20, 0.45);
+}
+
+/* Tier hero */
+html[data-theme="pixel"] .results-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(20, 20, 20, 0.45);
+  text-shadow: none;
+}
+
+html[data-theme="pixel"] .results-tier {
+  font-family: 'Mondwest', sans-serif;
+  font-size: clamp(4.5rem, 16vw, 9rem);
+  color: #0B2FCC;
+  text-shadow: none;
+}
+
+/* Score card */
+html[data-theme="pixel"] .results-score-card {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .score-number {
+  font-family: 'Mondwest', sans-serif;
+  color: #0B2FCC;
+}
+
+html[data-theme="pixel"] .score-fraction {
+  color: rgba(11, 47, 204, 0.4);
+}
+
+html[data-theme="pixel"] .score-message {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: rgba(20, 20, 20, 0.55);
+  line-height: 1.7;
+}
+
+/* Section titles */
+html[data-theme="pixel"] .results-section-title {
+  font-family: 'IBM Plex Mono', monospace;
+  color: rgba(20, 20, 20, 0.4);
+}
+
+/* Section breakdown rows */
+html[data-theme="pixel"] .section-row {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .section-row-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: #0B2FCC;
+}
+
+html[data-theme="pixel"] .section-row-bar {
+  height: 4px;
+  background: rgba(11, 47, 204, 0.12);
+  border-radius: 0;
+}
+
+html[data-theme="pixel"] .section-row-fill {
+  background: #0B2FCC;
+  border-radius: 0;
+}
+
+html[data-theme="pixel"] .section-row-score {
+  color: rgba(11, 47, 204, 0.45);
+}
+
+/* Next step cards */
+html[data-theme="pixel"] .next-step-card {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+
+html[data-theme="pixel"] .next-step-icon {
+  color: rgba(11, 47, 204, 0.4);
+}
+
+html[data-theme="pixel"] .next-step-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  color: #0B2FCC;
+  line-height: 1.65;
 }
