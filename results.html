@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALT Playbook Quiz — Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/quiz.css" />
+</head>
+<body class="quiz-body-page">
+
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Gradient background -->
+  <div class="orb-field quiz-orb-field" aria-hidden="true">
+    <div class="orb-warm"></div>
+    <div class="orb-mauve"></div>
+  </div>
+
+  <div class="results-page">
+
+    <!-- Top bar -->
+    <div class="results-topbar">
+      <a href="index2.html" class="quiz-home">← Home</a>
+      <span class="tag">ALT Playbook</span>
+      <a href="quiz.html" class="quiz-home">Retake →</a>
+    </div>
+
+    <!-- Constellation -->
+    <div class="constellation-wrap results-constellation-wrap">
+      <svg id="results-constellation-svg" class="constellation-svg" width="100%" height="56" viewBox="0 0 600 48" preserveAspectRatio="none"></svg>
+    </div>
+
+    <!-- Tier hero -->
+    <div class="results-hero">
+      <p class="results-eyebrow">You're a</p>
+      <h1 class="results-tier" id="results-tier">—</h1>
+    </div>
+
+    <!-- Score card -->
+    <div class="results-score-card">
+      <div class="score-number" id="score-number">—</div>
+      <div class="score-fraction">out of 27 correct</div>
+      <p class="score-message" id="score-message"></p>
+    </div>
+
+    <!-- Section breakdown -->
+    <div class="results-section" id="breakdown-section">
+      <p class="results-section-title">Section Breakdown</p>
+      <div class="section-breakdown" id="section-breakdown"></div>
+    </div>
+
+    <!-- Next steps -->
+    <div class="results-section" id="next-steps-section">
+      <p class="results-section-title">Next Steps</p>
+      <div class="next-steps" id="next-steps"></div>
+    </div>
+
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/cursor.js"></script>
+</body>
+</html>

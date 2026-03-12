@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALT Playbook Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/quiz.css" />
+</head>
+<body>
+
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Gradient background -->
+  <div class="orb-field" aria-hidden="true">
+    <div class="orb-warm"></div>
+    <div class="orb-mauve"></div>
+  </div>
+
+  <div class="landing">
+
+    <!-- Hero -->
+    <div class="landing-hero">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <!-- 4-pointed star -->
+          <svg class="hero-tag-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2 C12 2 12.8 7.5 14.5 9.5 C16.5 11.2 22 12 22 12 C22 12 16.5 12.8 14.5 14.5 C12.8 16.5 12 22 12 22 C12 22 11.2 16.5 9.5 14.5 C7.5 12.8 2 12 2 12 C2 12 7.5 11.2 9.5 9.5 C11.2 7.5 12 2 12 2Z" fill="currentColor"/>
+          </svg>
+          <span>Playbook</span>
+        </div>
+        <p class="hero-eyebrow">Test Your</p>
+        <h1 class="hero-title" id="alt-title">ALT</h1>
+        <p class="hero-knowledge">Knowledge</p>
+        <a href="quiz.html" class="btn-primary">Begin &nbsp;→</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+    const SHORT = 'ALT';
+    const LONG = 'AI-LEAN TEAM';
+    const titleEl = document.getElementById('alt-title');
+    let isAnimating = false;
+    let currentText = '';
+
+    function scrambleTo(target, duration) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const fps = 30;
+      const totalFrames = Math.floor(duration / (1000 / fps));
+      let frame = 0;
+
+      const timer = setInterval(() => {
+        let result = '';
+        const progress = frame / totalFrames;
+
+        for (let i = 0; i < target.length; i++) {
+          const charProgress = (progress - (i / target.length) * 0.6) / 0.4;
+          if (charProgress >= 1) {
+            result += target[i];
+          } else if (charProgress <= 0 || target[i] === ' ' || target[i] === '-') {
+            result += target[i] === ' ' ? ' ' : (target[i] === '-' ? '-' : CHARS[Math.floor(Math.random() * CHARS.length)]);
+          } else {
+            result += Math.random() > 0.4
+              ? CHARS[Math.floor(Math.random() * CHARS.length)]
+              : target[i];
+          }
+        }
+
+        titleEl.textContent = result;
+        frame++;
+
+        if (frame >= totalFrames) {
+          titleEl.textContent = target;
+          currentText = target;
+          clearInterval(timer);
+          isAnimating = false;
+        }
+      }, 1000 / fps);
+    }
+
+    window.addEventListener('load', () => {
+      scrambleTo(SHORT, 1400);
+    });
+
+    titleEl.addEventListener('mouseenter', () => {
+      if (currentText === SHORT) scrambleTo(LONG, 600);
+    });
+
+    titleEl.addEventListener('mouseleave', () => {
+      if (currentText === LONG) scrambleTo(SHORT, 500);
+    });
+
+  </script>
+  <script src="js/cursor.js"></script>
+
+</body>
+</html>

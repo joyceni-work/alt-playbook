@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALT Playbook Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Corner bracket decorators -->
+  <div class="corners" aria-hidden="true">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+  </div>
+
+  <div class="landing">
+
+    <!-- Top bar -->
+    <div class="landing-topbar">
+      <span class="tag">ALT Playbook</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="landing-hero">
+      <div class="hero-content">
+      <div class="hero-tag">
+        <svg class="hero-tag-icon" width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g clip-path="url(#book-clip)">
+            <path d="M3.81006 1.52H28.1901V3.05H5.34006V4.57H28.1901V6.1H3.81006V7.62H5.34006V30.48H3.81006V32H29.7201V30.48H6.86006V7.62H29.7201V30.48H31.2401V6.1H29.7201V1.52H31.2401V0H3.81006V1.52Z" fill="currentColor"/>
+            <path d="M25.15 24.38H23.62V25.91H25.15V24.38Z" fill="currentColor"/>
+            <path d="M25.15 12.19H23.62V10.67H12.96V12.19H11.43V13.72H9.91003V24.38H11.43V18.29H12.96V16.76H14.48V15.24H22.1V16.76H23.62V18.29H25.15V24.38H26.67V13.72H25.15V12.19Z" fill="currentColor"/>
+            <path d="M23.62 25.91H12.96V27.43H23.62V25.91Z" fill="currentColor"/>
+            <path d="M22.1001 21.33H20.5701V22.86H22.1001V21.33Z" fill="currentColor"/>
+            <path d="M22.1001 18.29H20.5701V19.81H22.1001V18.29Z" fill="currentColor"/>
+            <path d="M20.57 22.86H16V24.38H20.57V22.86Z" fill="currentColor"/>
+            <path d="M16 21.33H14.48V22.86H16V21.33Z" fill="currentColor"/>
+            <path d="M16 18.29H14.48V19.81H16V18.29Z" fill="currentColor"/>
+            <path d="M12.9601 24.38H11.4301V25.91H12.9601V24.38Z" fill="currentColor"/>
+            <path d="M3.81004 28.95H2.29004V30.48H3.81004V28.95Z" fill="currentColor"/>
+            <path d="M3.81004 1.51999H2.29004V3.04999H3.81004V1.51999Z" fill="currentColor"/>
+            <path d="M2.29001 6.09999H3.81001V4.56999H2.29001V3.04999H0.76001V28.95H2.29001V6.09999Z" fill="currentColor"/>
+          </g>
+          <defs>
+            <clipPath id="book-clip"><rect width="32" height="32" fill="white"/></clipPath>
+          </defs>
+        </svg>
+        <span>Playbook</span>
+      </div>
+      <p class="hero-eyebrow">Test Your</p>
+      <h1 class="hero-title" id="alt-title">ALT</h1>
+      <p class="hero-knowledge">Knowledge</p>
+      <a href="quiz.html" class="btn-primary">Begin &nbsp;→</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="landing-footer">
+      <span class="footer-text">AI-First Lean Teams Playbook</span>
+      <span class="footer-text">7 Sections &nbsp;·&nbsp; 27 Questions</span>
+    </div>
+
+    <!-- Pixel mosaic -->
+    <div class="landing-mosaic">
+      <canvas id="pixel-mosaic"></canvas>
+    </div>
+
+  </div>
+
+  <script>
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+    const SHORT = 'ALT';
+    const LONG = 'AI-LEAN TEAM';
+    const titleEl = document.getElementById('alt-title');
+    let isAnimating = false;
+    let currentText = '';
+
+    function scrambleTo(target, duration) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const fps = 30;
+      const totalFrames = Math.floor(duration / (1000 / fps));
+      let frame = 0;
+
+      const timer = setInterval(() => {
+        let result = '';
+        const progress = frame / totalFrames;
+
+        for (let i = 0; i < target.length; i++) {
+          const charProgress = (progress - (i / target.length) * 0.6) / 0.4;
+          if (charProgress >= 1) {
+            result += target[i];
+          } else if (charProgress <= 0 || target[i] === ' ' || target[i] === '-') {
+            result += target[i] === ' ' ? ' ' : (target[i] === '-' ? '-' : CHARS[Math.floor(Math.random() * CHARS.length)]);
+          } else {
+            result += Math.random() > 0.4
+              ? CHARS[Math.floor(Math.random() * CHARS.length)]
+              : target[i];
+          }
+        }
+
+        titleEl.textContent = result;
+        frame++;
+
+        if (frame >= totalFrames) {
+          titleEl.textContent = target;
+          currentText = target;
+          clearInterval(timer);
+          isAnimating = false;
+        }
+      }, 1000 / fps);
+    }
+
+    // Pixel mosaic
+    function drawMosaic() {
+      const canvas = document.getElementById('pixel-mosaic');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const SZ = 14;
+      const BLUE = '#0B2FCC';
+
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+
+      const cols = Math.ceil(canvas.width / SZ);
+      const rows = Math.ceil(canvas.height / SZ);
+
+      // Generate random column heights
+      const heights = Array.from({ length: cols }, () =>
+        Math.floor(Math.random() * rows * 0.75) + Math.floor(rows * 0.15)
+      );
+
+      // Smooth passes for organic skyline feel
+      for (let pass = 0; pass < 3; pass++) {
+        for (let c = 1; c < cols - 1; c++) {
+          heights[c] = Math.round((heights[c - 1] + heights[c] * 2 + heights[c + 1]) / 4);
+        }
+      }
+
+      // Collect all pixels that should be drawn
+      const pixels = [];
+      for (let c = 0; c < cols; c++) {
+        const startRow = rows - heights[c];
+        for (let r = startRow; r < rows; r++) {
+          const depth = (r - startRow) / heights[c];
+          const prob = r >= rows - 1 ? 0.97 : depth > 0.6 ? 0.82 : 0.55;
+          if (Math.random() < prob) pixels.push([c, r]);
+        }
+      }
+
+      // Shuffle pixels for random reveal
+      for (let i = pixels.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pixels[i], pixels[j]] = [pixels[j], pixels[i]];
+      }
+
+      // Animate pixel-in over 1200ms with a 400ms delay
+      const duration = 1200;
+      let drawn = 0;
+      let startTime = null;
+
+      function animate(now) {
+        if (!startTime) startTime = now;
+        const progress = Math.min((now - startTime) / duration, 1);
+        const target = Math.floor(progress * pixels.length);
+        ctx.fillStyle = BLUE;
+        for (; drawn < target; drawn++) {
+          const [c, r] = pixels[drawn];
+          ctx.fillRect(c * SZ, r * SZ, SZ - 1, SZ - 1);
+        }
+        if (progress < 1) requestAnimationFrame(animate);
+      }
+
+      setTimeout(() => requestAnimationFrame(animate), 400);
+    }
+
+    // Scramble in on load
+    window.addEventListener('load', () => {
+      scrambleTo(SHORT, 1400);
+      drawMosaic();
+    });
+
+    // Hover: expand to full name
+    titleEl.addEventListener('mouseenter', () => {
+      if (currentText === SHORT) scrambleTo(LONG, 600);
+    });
+
+    // Mouse leave: collapse back
+    titleEl.addEventListener('mouseleave', () => {
+      if (currentText === LONG) scrambleTo(SHORT, 500);
+    });
+  </script>
+
+</body>
+</html>
