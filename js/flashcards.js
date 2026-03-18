@@ -67,7 +67,9 @@ function flipCard() {
 
 flipBtn.addEventListener('click', flipCard);
 scene.addEventListener('click', function (e) {
-  if (!e.target.closest('button')) flipCard();
+  if (!e.target.closest('button') && Math.abs((dragCurrentX ?? dragStartX ?? 0) - (dragStartX ?? 0)) < 8) {
+    flipCard();
+  }
 });
 scene.addEventListener('keydown', function (e) {
   if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flipCard(); }
@@ -91,5 +93,59 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' && currentCard < deck.length - 1) { currentCard++; renderCard(); }
   if (e.key === 'ArrowLeft'  && currentCard > 0)               { currentCard--; renderCard(); }
 });
+
+// ── Drag to navigate ──
+const DRAG_THRESHOLD = 80;
+let dragStartX = null;
+let dragCurrentX = null;
+let isDragging = false;
+
+function getDragX(e) {
+  return e.touches ? e.touches[0].clientX : e.clientX;
+}
+
+function onDragStart(e) {
+  dragStartX = getDragX(e);
+  dragCurrentX = dragStartX;
+  isDragging = true;
+  cardEl.classList.add('is-dragging');
+}
+
+function onDragMove(e) {
+  if (!isDragging) return;
+  dragCurrentX = getDragX(e);
+  const delta = dragCurrentX - dragStartX;
+  const rotate = delta * 0.04;
+  // Preserve the flip state while dragging
+  const baseTransform = flipped ? 'rotateY(180deg)' : '';
+  cardEl.style.transform = `${baseTransform} translateX(${delta}px) rotate(${rotate}deg)`;
+}
+
+function onDragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
+  cardEl.classList.remove('is-dragging');
+  cardEl.style.transform = '';
+
+  const delta = dragCurrentX - dragStartX;
+  if (delta < -DRAG_THRESHOLD && currentCard < deck.length - 1) {
+    currentCard++;
+    renderCard();
+  } else if (delta > DRAG_THRESHOLD && currentCard > 0) {
+    currentCard--;
+    renderCard();
+  }
+
+  dragStartX = null;
+  dragCurrentX = null;
+}
+
+scene.addEventListener('mousedown',  onDragStart);
+window.addEventListener('mousemove', onDragMove);
+window.addEventListener('mouseup',   onDragEnd);
+
+scene.addEventListener('touchstart', onDragStart, { passive: true });
+window.addEventListener('touchmove', onDragMove,  { passive: true });
+window.addEventListener('touchend',  onDragEnd);
 
 renderCard();

@@ -1777,8 +1777,8 @@ html[data-theme="pixel"] .next-step-text {
   width: 100%;
   height: 320px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(225, 223, 220, 0.75);
+  border: 1px solid rgba(200, 198, 195, 0.4);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -1830,17 +1830,20 @@ html[data-theme="pixel"] .next-step-text {
   justify-content: center;
   padding: 2rem;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(238, 237, 235, 0.92);
+  border: 1px solid rgba(200, 198, 195, 0.6);
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
   text-align: center;
   gap: 1rem;
 }
 
 .fc-back {
   transform: rotateY(180deg);
-  background: rgba(255, 255, 255, 0.2);
+}
+
+.fc-card.is-dragging {
+  transition: none;
 }
 
 .fc-label {
@@ -1849,14 +1852,14 @@ html[data-theme="pixel"] .next-step-text {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(20, 20, 20, 0.38);
   margin: 0;
 }
 
 .fc-text {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 2.5vw, 1.3rem);
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(20, 20, 20, 0.88);
   line-height: 1.55;
   margin: 0;
 }
@@ -1865,7 +1868,7 @@ html[data-theme="pixel"] .next-step-text {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(20, 20, 20, 0.3);
   margin: 0;
 }
 
