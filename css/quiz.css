@@ -1818,6 +1818,21 @@ html[data-theme="pixel"] .next-step-text {
   transform: rotateY(180deg);
 }
 
+.fc-card--rise {
+  animation: fcRise 0.42s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+@keyframes fcRise {
+  from {
+    transform: scale(0.88) translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
 .fc-front,
 .fc-back {
   position: absolute;
