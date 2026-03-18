@@ -1762,14 +1762,48 @@ html[data-theme="pixel"] .next-step-text {
   transition: width 0.35s ease-out;
 }
 
-/* Card */
-.fc-scene {
+/* Stacked card layout */
+.fc-stack {
+  position: relative;
   width: 100%;
   max-width: 640px;
+  height: 360px; /* extra room for ghost peekout */
+}
+
+.fc-ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 320px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.fc-ghost-1 {
+  transform: rotate(2deg) translateY(10px);
+  z-index: 1;
+}
+
+.fc-ghost-2 {
+  transform: rotate(-2.5deg) translateY(18px);
+  z-index: 0;
+}
+
+/* Card */
+.fc-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 320px;
   perspective: 1000px;
   cursor: none;
   outline: none;
+  z-index: 2;
 }
 
 .fc-card {
@@ -1849,11 +1883,11 @@ html[data-theme="pixel"] .next-step-text {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 100px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   cursor: none;
   transition: background 0.2s, color 0.2s;
 }
@@ -1863,10 +1897,6 @@ html[data-theme="pixel"] .next-step-text {
   color: rgba(255, 255, 255, 0.95);
 }
 
-.fc-nav-btn:disabled {
-  opacity: 0.25;
-  cursor: not-allowed;
-}
 
 .fc-flip-btn {
   font-family: 'IBM Plex Mono', monospace;
@@ -1936,6 +1966,14 @@ html[data-theme="pixel"] .fc-track {
   border-radius: 0;
 }
 
+html[data-theme="pixel"] .fc-ghost {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 html[data-theme="pixel"] .fc-front,
 html[data-theme="pixel"] .fc-back {
   background: #fff;
@@ -1960,7 +1998,8 @@ html[data-theme="pixel"] .fc-hint {
 
 html[data-theme="pixel"] .fc-nav-btn {
   color: #0D0D0D;
-  border: 1.5px solid rgba(20, 20, 20, 0.25);
+  background: #fff;
+  border: 1.5px solid rgba(20, 20, 20, 0.55);
   border-radius: 0;
   backdrop-filter: none;
 }

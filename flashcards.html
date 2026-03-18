@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALT Playbook — Practice</title>
+  <title>ALT Playbook — Practice Flashcards</title>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/quiz.css" />
   <script>(function(){var t=localStorage.getItem('alt-theme')||'dreamlight';document.documentElement.setAttribute('data-theme',t);})();</script>
@@ -43,37 +43,50 @@
     </div>
 
     <!-- Progress -->
-    <div class="fc-progress-row">
-      <span class="fc-count" id="fc-count">1 / 1</span>
-      <div class="fc-track">
+    <div class="fc-progress-row" role="status" aria-live="polite">
+      <span class="fc-count" id="fc-count" aria-label="Card 1 of 27">1 / 27</span>
+      <div class="fc-track" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="27">
         <div class="fc-fill" id="fc-fill"></div>
       </div>
     </div>
 
-    <!-- Card -->
-    <div class="fc-scene" id="fc-scene" tabindex="0" aria-label="Flashcard, press space or click to flip">
-      <div class="fc-card" id="fc-card">
-        <div class="fc-front">
-          <p class="fc-label">Term</p>
-          <p class="fc-text" id="fc-front-text"></p>
-          <p class="fc-hint">Click to reveal →</p>
-        </div>
-        <div class="fc-back">
-          <p class="fc-label">From the Playbook</p>
-          <p class="fc-text" id="fc-back-text"></p>
+    <!-- Stacked card scene -->
+    <div class="fc-stack">
+      <div class="fc-ghost fc-ghost-2" aria-hidden="true"></div>
+      <div class="fc-ghost fc-ghost-1" aria-hidden="true"></div>
+
+      <div class="fc-scene"
+           id="fc-scene"
+           tabindex="0"
+           role="button"
+           aria-pressed="false"
+           aria-label="Flashcard: question shown. Press Space or Enter to flip.">
+        <div class="fc-card" id="fc-card">
+
+          <div class="fc-front" role="group" aria-label="Front of card">
+            <p class="fc-label" aria-hidden="true">Term</p>
+            <p class="fc-text" id="fc-front-text" aria-live="polite"></p>
+            <p class="fc-hint" aria-hidden="true">Click or press Space to reveal →</p>
+          </div>
+
+          <div class="fc-back" role="group" aria-label="Back of card">
+            <p class="fc-label" aria-hidden="true">From the Playbook</p>
+            <p class="fc-text" id="fc-back-text" aria-live="polite"></p>
+          </div>
+
         </div>
       </div>
     </div>
 
     <!-- Controls -->
-    <div class="fc-controls">
+    <div class="fc-controls" role="group" aria-label="Card navigation">
       <button class="fc-nav-btn" id="fc-prev" aria-label="Previous card">← Prev</button>
-      <button class="fc-flip-btn" id="fc-flip">Flip Card</button>
+      <button class="fc-flip-btn" id="fc-flip" aria-pressed="false">Flip Card</button>
       <button class="fc-nav-btn" id="fc-next" aria-label="Next card">Next →</button>
     </div>
 
     <!-- Shuffle -->
-    <button class="fc-shuffle-btn" id="fc-shuffle">⇄ Shuffle</button>
+    <button class="fc-shuffle-btn" id="fc-shuffle" aria-label="Shuffle deck">⇄ Shuffle</button>
 
   </div>
 
