@@ -1811,7 +1811,7 @@ html[data-theme="pixel"] .next-step-text {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .fc-card.is-flipped {
@@ -1867,7 +1867,7 @@ html[data-theme="pixel"] .next-step-text {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(20, 20, 20, 0.38);
+  color: rgba(20, 20, 20, 0.62);
   margin: 0;
 }
 
@@ -1883,7 +1883,7 @@ html[data-theme="pixel"] .next-step-text {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.1em;
-  color: rgba(20, 20, 20, 0.3);
+  color: rgba(20, 20, 20, 0.55);
   margin: 0;
 }
 
@@ -1956,6 +1956,46 @@ html[data-theme="pixel"] .next-step-text {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.fc-bottom-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+
+.fc-drag-hint {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.fc-ready {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  width: 100%;
+  max-width: 640px;
+}
+
+.fc-ready-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.fc-ready .btn-primary {
+  margin-top: 0;
+}
+
 /* ── Pixel theme overrides ── */
 html[data-theme="pixel"] .fc-eyebrow {
   font-family: 'IBM Plex Mono', monospace;
@@ -2002,7 +2042,7 @@ html[data-theme="pixel"] .fc-back {
 }
 
 html[data-theme="pixel"] .fc-label {
-  color: rgba(20, 20, 20, 0.4);
+  color: rgba(20, 20, 20, 0.62);
 }
 
 html[data-theme="pixel"] .fc-text {
@@ -2011,7 +2051,7 @@ html[data-theme="pixel"] .fc-text {
 }
 
 html[data-theme="pixel"] .fc-hint {
-  color: rgba(20, 20, 20, 0.3);
+  color: rgba(20, 20, 20, 0.55);
 }
 
 html[data-theme="pixel"] .fc-nav-btn {
@@ -2046,4 +2086,16 @@ html[data-theme="pixel"] .fc-shuffle-btn {
 
 html[data-theme="pixel"] .fc-shuffle-btn:hover {
   color: #0B2FCC;
+}
+
+html[data-theme="pixel"] .fc-drag-hint {
+  color: rgba(20, 20, 20, 0.4);
+}
+
+html[data-theme="pixel"] .fc-ready {
+  border-top-color: rgba(20, 20, 20, 0.12);
+}
+
+html[data-theme="pixel"] .fc-ready-label {
+  color: rgba(20, 20, 20, 0.5);
 }
