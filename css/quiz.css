@@ -314,7 +314,46 @@ body.quiz-body-page {
     0 0 100px rgba(255, 255, 255, 0.25);
 }
 
-/* Section 3: button */
+/* Section 3: buttons */
+.cta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: var(--sp-12);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 100px;
+  padding: 16px 28px;
+  cursor: none;
+  text-decoration: none;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -331,7 +370,6 @@ body.quiz-body-page {
   padding: 16px 36px;
   cursor: none;
   text-decoration: none;
-  margin-top: var(--sp-12);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow:
@@ -1193,6 +1231,10 @@ html[data-theme="pixel"] .hero-knowledge {
   text-transform: uppercase;
 }
 
+html[data-theme="pixel"] .cta-group {
+  margin-top: 0.5rem;
+}
+
 html[data-theme="pixel"] .btn-primary {
   color: #F4F4F2;
   background: #0D0D0D;
@@ -1202,13 +1244,27 @@ html[data-theme="pixel"] .btn-primary {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
-  margin-top: 0.5rem;
 }
 
 html[data-theme="pixel"] .btn-primary:hover {
   background: rgba(13, 13, 13, 0.75);
   border-color: transparent;
   box-shadow: none;
+  transform: none;
+}
+
+html[data-theme="pixel"] .btn-secondary {
+  color: #0B2FCC;
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  padding: 14px 28px;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-theme="pixel"] .btn-secondary:hover {
+  background: rgba(11, 47, 204, 0.06);
   transform: none;
 }
 
@@ -1635,4 +1691,302 @@ html[data-theme="pixel"] .next-step-text {
   font-size: 0.8rem;
   color: #0B2FCC;
   line-height: 1.65;
+}
+
+/* ============================================
+   FLASHCARD PAGE
+   ============================================ */
+
+.fc-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 var(--sp-6) var(--sp-12);
+}
+
+.fc-header {
+  text-align: center;
+  margin-top: clamp(2rem, 6vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+
+.fc-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 0.5rem;
+}
+
+.fc-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+}
+
+/* Progress */
+.fc-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+  margin-bottom: 1.5rem;
+}
+
+.fc-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.fc-track {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.fc-fill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 99px;
+  transition: width 0.35s ease-out;
+}
+
+/* Card */
+.fc-scene {
+  width: 100%;
+  max-width: 640px;
+  height: 320px;
+  perspective: 1000px;
+  cursor: none;
+  outline: none;
+}
+
+.fc-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fc-card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.fc-front,
+.fc-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  text-align: center;
+  gap: 1rem;
+}
+
+.fc-back {
+  transform: rotateY(180deg);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.fc-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0;
+}
+
+.fc-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.fc-hint {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
+/* Controls */
+.fc-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.fc-nav-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 100px;
+  padding: 10px 20px;
+  cursor: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.fc-nav-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.fc-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.fc-flip-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 100px;
+  padding: 12px 28px;
+  cursor: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.2s;
+}
+
+.fc-flip-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.fc-shuffle-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+  border: none;
+  padding: 8px 12px;
+  cursor: none;
+  margin-top: 0.5rem;
+  transition: color 0.2s;
+}
+
+.fc-shuffle-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Pixel theme overrides ── */
+html[data-theme="pixel"] .fc-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  color: rgba(20, 20, 20, 0.45);
+}
+
+html[data-theme="pixel"] .fc-title {
+  font-family: 'Mondwest', sans-serif;
+  color: #0B2FCC;
+}
+
+html[data-theme="pixel"] .fc-count {
+  color: rgba(20, 20, 20, 0.45);
+}
+
+html[data-theme="pixel"] .fc-track {
+  background: rgba(20, 20, 20, 0.12);
+}
+
+html[data-theme="pixel"] .fc-fill {
+  background: #0B2FCC;
+  border-radius: 0;
+}
+
+html[data-theme="pixel"] .fc-track {
+  border-radius: 0;
+}
+
+html[data-theme="pixel"] .fc-front,
+html[data-theme="pixel"] .fc-back {
+  background: #fff;
+  border: 1.5px solid #0B2FCC;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-theme="pixel"] .fc-label {
+  color: rgba(20, 20, 20, 0.4);
+}
+
+html[data-theme="pixel"] .fc-text {
+  font-family: 'IBM Plex Mono', monospace;
+  color: #0D0D0D;
+}
+
+html[data-theme="pixel"] .fc-hint {
+  color: rgba(20, 20, 20, 0.3);
+}
+
+html[data-theme="pixel"] .fc-nav-btn {
+  color: #0D0D0D;
+  border: 1.5px solid rgba(20, 20, 20, 0.25);
+  border-radius: 0;
+  backdrop-filter: none;
+}
+
+html[data-theme="pixel"] .fc-nav-btn:hover:not(:disabled) {
+  background: rgba(11, 47, 204, 0.06);
+  color: #0B2FCC;
+  border-color: #0B2FCC;
+}
+
+html[data-theme="pixel"] .fc-flip-btn {
+  color: #F4F4F2;
+  background: #0B2FCC;
+  border: none;
+  border-radius: 0;
+  backdrop-filter: none;
+}
+
+html[data-theme="pixel"] .fc-flip-btn:hover {
+  background: rgba(11, 47, 204, 0.82);
+}
+
+html[data-theme="pixel"] .fc-shuffle-btn {
+  color: rgba(20, 20, 20, 0.4);
+}
+
+html[data-theme="pixel"] .fc-shuffle-btn:hover {
+  color: #0B2FCC;
 }

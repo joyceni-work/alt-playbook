@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dreamlight">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALT Playbook — Practice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/quiz.css" />
+  <script>(function(){var t=localStorage.getItem('alt-theme')||'dreamlight';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body class="quiz-body-page">
+
+  <!-- Grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Gradient background -->
+  <div class="orb-field quiz-orb-field" aria-hidden="true">
+    <div class="orb-warm"></div>
+    <div class="orb-mauve"></div>
+  </div>
+
+  <!-- Corner brackets (pixel) -->
+  <div class="corners" aria-hidden="true">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+  </div>
+
+  <div class="fc-page">
+
+    <!-- Top bar -->
+    <div class="results-topbar">
+      <a href="index2.html" class="quiz-home">← Home</a>
+      <span class="tag">ALT Playbook</span>
+      <a href="quiz.html" class="quiz-home">Take Quiz →</a>
+    </div>
+
+    <!-- Header -->
+    <div class="fc-header">
+      <p class="fc-eyebrow">Flashcard Practice</p>
+      <h1 class="fc-title">Review the Concepts</h1>
+    </div>
+
+    <!-- Progress -->
+    <div class="fc-progress-row">
+      <span class="fc-count" id="fc-count">1 / 1</span>
+      <div class="fc-track">
+        <div class="fc-fill" id="fc-fill"></div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="fc-scene" id="fc-scene" tabindex="0" aria-label="Flashcard, press space or click to flip">
+      <div class="fc-card" id="fc-card">
+        <div class="fc-front">
+          <p class="fc-label">Term</p>
+          <p class="fc-text" id="fc-front-text"></p>
+          <p class="fc-hint">Click to reveal →</p>
+        </div>
+        <div class="fc-back">
+          <p class="fc-label">From the Playbook</p>
+          <p class="fc-text" id="fc-back-text"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="fc-controls">
+      <button class="fc-nav-btn" id="fc-prev" aria-label="Previous card">← Prev</button>
+      <button class="fc-flip-btn" id="fc-flip">Flip Card</button>
+      <button class="fc-nav-btn" id="fc-next" aria-label="Next card">Next →</button>
+    </div>
+
+    <!-- Shuffle -->
+    <button class="fc-shuffle-btn" id="fc-shuffle">⇄ Shuffle</button>
+
+  </div>
+
+  <script src="js/questions.js"></script>
+  <script src="js/flashcards.js"></script>
+  <script src="js/cursor.js"></script>
+
+</body>
+</html>
