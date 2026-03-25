@@ -42,12 +42,17 @@
       <h1 class="fc-title" style="color:rgba(20,20,20,0.85)">Review the Concepts</h1>
     </div>
 
-    <!-- Progress -->
-    <div class="fc-progress-row" role="status" aria-live="polite">
-      <span class="fc-count" id="fc-count" aria-label="Card 1 of 27" style="color:rgba(20,20,20,0.45)">1 / 27</span>
-      <div class="fc-track" style="background:rgba(20,20,20,0.12)" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="27">
-        <div class="fc-fill" id="fc-fill"></div>
+    <!-- Constellation progress (dreamlight) -->
+    <div class="constellation-wrap" id="fc-constellation-wrap">
+      <svg id="fc-constellation-svg" class="constellation-svg" width="100%" height="56" viewBox="0 0 600 48" preserveAspectRatio="none"></svg>
+    </div>
+
+    <!-- Retro progress bar (pixel) -->
+    <div class="retro-progress-wrap" id="fc-retro-wrap">
+      <div class="retro-progress-track">
+        <div class="retro-progress-fill" id="fc-retro-fill"></div>
       </div>
+      <span class="retro-progress-label" id="fc-count">01 / 27</span>
     </div>
 
     <!-- Stacked card scene -->
@@ -85,10 +90,8 @@
       <button class="fc-nav-btn" id="fc-next" aria-label="Next card">Next →</button>
     </div>
 
-    <!-- Shuffle + drag hint + CTA -->
+    <!-- CTA -->
     <div class="fc-bottom-row">
-      <button class="fc-shuffle-btn" id="fc-shuffle" aria-label="Shuffle deck">⇄ Shuffle</button>
-      <span class="fc-drag-hint" aria-hidden="true">← drag to navigate →</span>
       <a href="quiz.html" class="fc-ready-cta">Ready to Test →</a>
     </div>
 

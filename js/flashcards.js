@@ -19,8 +19,36 @@ const flipBtn  = document.getElementById('fc-flip');
 const prevBtn  = document.getElementById('fc-prev');
 const nextBtn  = document.getElementById('fc-next');
 const countEl  = document.getElementById('fc-count');
-const fillEl   = document.getElementById('fc-fill');
-const trackEl  = fillEl.parentElement;
+const retroFill = document.getElementById('fc-retro-fill');
+
+const CONSTELLATION_Y = [28,20,36,16,32,24,40,18,30,22,38,14,26,34,20,28,16,36,24,40,18,30,22,34,20,28,36,16];
+
+function renderFCConstellation() {
+  const svg = document.getElementById('fc-constellation-svg');
+  if (!svg) return;
+  const total = deck.length;
+  const W = 600, margin = 18;
+  const step = (W - margin * 2) / (total - 1);
+  const dots = CONSTELLATION_Y.slice(0, total).map((y, i) => ({ x: margin + i * step, y }));
+  let html = '';
+  for (let i = 0; i < total - 1; i++) {
+    const lit = i < currentCard;
+    html += `<line x1="${dots[i].x}" y1="${dots[i].y}" x2="${dots[i+1].x}" y2="${dots[i+1].y}" stroke="${lit ? 'rgba(10,10,10,0.7)' : 'rgba(10,10,10,0.2)'}" stroke-width="${lit ? 1.5 : 0.8}" stroke-linecap="round"/>`;
+  }
+  for (let i = 0; i < total; i++) {
+    const completed = i < currentCard;
+    const current   = i === currentCard;
+    if (current) {
+      html += `<circle cx="${dots[i].x}" cy="${dots[i].y}" r="7" fill="rgba(10,10,10,0.1)"/>`;
+      html += `<circle cx="${dots[i].x}" cy="${dots[i].y}" r="4" fill="rgba(10,10,10,0.85)"/>`;
+    } else if (completed) {
+      html += `<circle cx="${dots[i].x}" cy="${dots[i].y}" r="2.8" fill="rgba(10,10,10,0.65)"/>`;
+    } else {
+      html += `<circle cx="${dots[i].x}" cy="${dots[i].y}" r="2" fill="rgba(10,10,10,0.22)"/>`;
+    }
+  }
+  svg.innerHTML = html;
+}
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -37,11 +65,9 @@ function updateMeta() {
 
   document.getElementById('fc-front-text').textContent = card.term;
   document.getElementById('fc-back-text').textContent  = card.definition;
-  countEl.textContent = `${n} / ${total}`;
-  countEl.setAttribute('aria-label', `Card ${n} of ${total}`);
-  fillEl.style.width = `${(n / total) * 100}%`;
-  trackEl.setAttribute('aria-valuenow', n);
-  trackEl.setAttribute('aria-valuemax', total);
+  if (countEl) countEl.textContent = `${String(n).padStart(2,'0')} / ${total}`;
+  if (retroFill) retroFill.style.width = `${(currentCard / (total - 1)) * 100}%`;
+  renderFCConstellation();
   scene.setAttribute('aria-label', `Card ${n} of ${total}: ${card.term}. Press Space or Enter to flip.`);
 }
 
@@ -109,11 +135,6 @@ scene.addEventListener('keydown', function (e) {
 nextBtn.addEventListener('click', () => navigateTo(currentCard + 1));
 prevBtn.addEventListener('click', () => navigateTo(currentCard - 1));
 
-document.getElementById('fc-shuffle').addEventListener('click', () => {
-  shuffle(deck);
-  currentCard = 0;
-  renderCard();
-});
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigateTo(currentCard + 1);
