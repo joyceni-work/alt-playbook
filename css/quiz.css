@@ -1974,6 +1974,10 @@ html[data-theme="pixel"] .next-step-text {
 }
 
 .fc-ready-cta {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.65rem;
   font-weight: 500;
@@ -1984,7 +1988,8 @@ html[data-theme="pixel"] .next-step-text {
   padding: 0.45rem 1rem;
   border-radius: 100px;
   transition: color 0.2s, border-color 0.2s;
-  margin-top: 0.25rem;
+  white-space: nowrap;
+  z-index: 10;
 }
 
 .fc-ready-cta:hover {
