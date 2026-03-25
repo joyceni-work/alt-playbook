@@ -2016,15 +2016,22 @@ html[data-theme="pixel"] .fc-count {
 }
 
 html[data-theme="pixel"] .fc-track {
-  background: rgba(20, 20, 20, 0.12);
+  height: 18px;
+  background: rgba(20, 20, 20, 0.06);
+  border: 1.5px solid rgba(20, 20, 20, 0.35);
+  border-radius: 0;
+  padding: 2px;
 }
 
 html[data-theme="pixel"] .fc-fill {
-  background: #0B2FCC;
-  border-radius: 0;
-}
-
-html[data-theme="pixel"] .fc-track {
+  background-image: repeating-linear-gradient(
+    90deg,
+    #0B2FCC 0px,
+    #0B2FCC 9px,
+    transparent 9px,
+    transparent 11px
+  );
+  background-color: transparent;
   border-radius: 0;
 }
 
