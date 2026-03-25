@@ -1717,7 +1717,7 @@ html[data-theme="pixel"] .next-step-text {
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(20, 20, 20, 0.5);
   margin: 0 0 0.5rem;
 }
 
@@ -1725,7 +1725,7 @@ html[data-theme="pixel"] .next-step-text {
   font-family: var(--font-serif);
   font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(20, 20, 20, 0.85);
   margin: 0;
 }
 
@@ -1743,21 +1743,21 @@ html[data-theme="pixel"] .next-step-text {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.65rem;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(20, 20, 20, 0.45);
   white-space: nowrap;
 }
 
 .fc-track {
   flex: 1;
   height: 3px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(20, 20, 20, 0.12);
   border-radius: 99px;
   overflow: hidden;
 }
 
 .fc-fill {
   height: 100%;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(20, 20, 20, 0.5);
   border-radius: 99px;
   transition: width 0.35s ease-out;
 }
@@ -2000,41 +2000,6 @@ html[data-theme="pixel"] .next-step-text {
   background: rgba(255, 255, 255, 0.4);
 }
 
-/* ── Dreamlight theme overrides ── */
-/* Orbs sit at the bottom — top of page is bare #C8C0CC, so use dark text */
-
-/* Topbar */
-html[data-theme="dreamlight"] .fc-page .results-topbar .quiz-home {
-  color: rgba(20, 20, 20, 0.5);
-}
-html[data-theme="dreamlight"] .fc-page .results-topbar .quiz-home:hover {
-  color: rgba(20, 20, 20, 0.85);
-}
-html[data-theme="dreamlight"] .fc-page .results-topbar .tag {
-  color: rgba(20, 20, 20, 0.45);
-}
-
-/* Header */
-html[data-theme="dreamlight"] .fc-eyebrow {
-  color: rgba(20, 20, 20, 0.5);
-}
-html[data-theme="dreamlight"] .fc-title {
-  font-family: var(--font-serif);
-  color: rgba(20, 20, 20, 0.85);
-}
-
-/* Progress */
-html[data-theme="dreamlight"] .fc-count {
-  color: rgba(20, 20, 20, 0.45);
-}
-html[data-theme="dreamlight"] .fc-track {
-  background: rgba(20, 20, 20, 0.12);
-  border-radius: 99px;
-}
-html[data-theme="dreamlight"] .fc-fill {
-  background: rgba(20, 20, 20, 0.5);
-  border-radius: 99px;
-}
 
 /* ── Pixel theme overrides ── */
 html[data-theme="pixel"] .fc-eyebrow {
