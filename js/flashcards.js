@@ -187,11 +187,15 @@ function onDragEnd() {
       setTimeout(() => { cardEl.classList.remove('fc-card--rise'); animating = false; }, 420);
     }, 200);
 
-  } else {
-    // Snap back
+  } else if (wasDrag) {
+    // Snap back after partial drag — spring feel
     cardEl.style.transition = 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1)';
     cardEl.style.transform  = '';
     setTimeout(() => { cardEl.style.transition = ''; }, 320);
+  } else {
+    // Pure tap/click — clear any inline styles so the CSS flip transition runs at full 2s
+    cardEl.style.transition = '';
+    cardEl.style.transform  = '';
   }
 
   dragStartX   = null;
