@@ -1707,8 +1707,8 @@ html[data-theme="pixel"] .next-step-text {
 
 .fc-header {
   text-align: center;
-  margin-top: clamp(2rem, 6vw, 4rem);
-  margin-bottom: 1.5rem;
+  margin-top: clamp(0.75rem, 2vw, 1.5rem);
+  margin-bottom: 1rem;
 }
 
 .fc-eyebrow {
@@ -1962,6 +1962,8 @@ html[data-theme="pixel"] .next-step-text {
   align-items: center;
   gap: 6px;
   margin-top: 0.5rem;
+  width: 100%;
+  max-width: 640px;
 }
 
 .fc-drag-hint {
@@ -1971,29 +1973,23 @@ html[data-theme="pixel"] .next-step-text {
   color: rgba(255, 255, 255, 0.4);
 }
 
-.fc-ready {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  width: 100%;
-  max-width: 640px;
-}
-
-.fc-ready-label {
+.fc-ready-cta {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.45rem 1rem;
+  border-radius: 100px;
+  transition: color 0.2s, border-color 0.2s;
+  margin-top: 0.25rem;
 }
 
-.fc-ready .btn-primary {
-  margin-top: 0;
+.fc-ready-cta:hover {
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 /* ── Pixel theme overrides ── */
@@ -2092,10 +2088,13 @@ html[data-theme="pixel"] .fc-drag-hint {
   color: rgba(20, 20, 20, 0.4);
 }
 
-html[data-theme="pixel"] .fc-ready {
-  border-top-color: rgba(20, 20, 20, 0.12);
+html[data-theme="pixel"] .fc-ready-cta {
+  color: rgba(20, 20, 20, 0.5);
+  border-color: rgba(20, 20, 20, 0.25);
+  border-radius: 0;
 }
 
-html[data-theme="pixel"] .fc-ready-label {
-  color: rgba(20, 20, 20, 0.5);
+html[data-theme="pixel"] .fc-ready-cta:hover {
+  color: #0B2FCC;
+  border-color: #0B2FCC;
 }
