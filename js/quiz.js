@@ -97,6 +97,8 @@ function selectAnswer(selectedIndex) {
     scores[q.section].correct++;
   }
 
+  const isCorrect = selectedIndex === q.answer;
+
   // Apply correct / incorrect styles
   optionBtns.forEach((btn, i) => {
     btn.disabled = true;
@@ -107,12 +109,15 @@ function selectAnswer(selectedIndex) {
     }
   });
 
-  // Show explanation
-  document.getElementById('explanation-text').textContent = q.explanation;
-  document.getElementById('explanation').classList.add('visible');
-
-  // Show next button
-  document.getElementById('next-btn').classList.add('visible');
+  if (isCorrect) {
+    // Auto-advance after a brief pause so user sees the green state
+    setTimeout(nextQuestion, 1000);
+  } else {
+    // Show playbook excerpt and require user to click Next
+    document.getElementById('explanation-text').textContent = q.explanation;
+    document.getElementById('explanation').classList.add('visible');
+    document.getElementById('next-btn').classList.add('visible');
+  }
 }
 
 // ── Navigate to next question or results ──
