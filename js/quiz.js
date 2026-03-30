@@ -152,7 +152,7 @@ function renderResults() {
   const pct = (totalCorrect / total) * 100;
 
   // Tier
-  const tier = pct >= 80 ? 'Expert' : pct >= 55 ? 'Practitioner' : 'Novice';
+  const tier = pct >= 80 ? 'ALT Champion' : pct >= 55 ? 'ALT Ready' : 'ALT Curious';
   document.getElementById('results-tier').textContent = tier;
   document.getElementById('score-number').textContent = totalCorrect;
   document.getElementById('score-message').textContent = getScoreMessage(totalCorrect, total);
@@ -193,17 +193,17 @@ function renderResults() {
     { icon: '✦', text: 'Add ALT as a skill in Salesforce to be considered for ALT projects.' }
   ];
   const tierSteps = {
-    Novice: [
+    'ALT Curious': [
       { icon: '→', text: 'Read the ALT Playbook from start to finish — it\'s a quick, worthwhile read.' },
       { icon: '→', text: `Focus especially on "${weakestSection}" — that\'s your biggest opportunity area.` },
       { icon: '→', text: 'Shadow an active ALT team in a sprint to see the principles in practice.' }
     ],
-    Practitioner: [
+    'ALT Ready': [
       { icon: '→', text: `Revisit "${weakestSection}" — a focused re-read of that section will sharpen your score.` },
       { icon: '→', text: 'Pair with a senior ALT practitioner for a working session to deepen your understanding.' },
       { icon: '→', text: 'Propose applying ALT principles on your next project.' }
     ],
-    Expert: [
+    'ALT Champion': [
       { icon: '→', text: 'Mentor a colleague through the ALT Playbook — teaching is the best test of mastery.' },
       { icon: '→', text: 'Champion ALT adoption in your practice area and help build a community of practitioners.' },
       { icon: '→', text: 'Propose an ALT pilot for an upcoming engagement.' }
