@@ -911,7 +911,7 @@ body.quiz-body-page {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 2vw, 1.4rem);
   color: rgba(255, 255, 255, 0.75);
-  margin-bottom: 0.1rem;
+  margin-bottom: 1rem;
   text-shadow:
     0 0 10px rgba(255, 255, 255, 0.6),
     0 0 28px rgba(255, 255, 255, 0.3);
