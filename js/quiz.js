@@ -154,6 +154,8 @@ function renderResults() {
   // Tier
   const tier = pct >= 80 ? 'ALT Champion' : pct >= 55 ? 'ALT Ready' : 'ALT Curious';
   document.getElementById('results-tier').textContent = tier;
+  const eyebrow = document.getElementById('results-eyebrow');
+  if (eyebrow) eyebrow.textContent = tier === 'ALT Champion' ? "You're an" : "You're";
   document.getElementById('score-number').textContent = totalCorrect;
   document.getElementById('score-message').textContent = getScoreMessage(totalCorrect, total);
 
